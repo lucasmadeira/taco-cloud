@@ -2,6 +2,7 @@ package tacos;
 
 import lombok.Data;
 
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Collection;
@@ -9,8 +10,11 @@ import java.util.Date;
 import java.util.List;
 
 @Data
+@Entity
 public class Taco {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private Date createdAt;
@@ -20,5 +24,11 @@ public class Taco {
     private String name;
 
     @Size(min = 1, message = "You must choose at least 1 ingredient")
-    private Collection<Ingredient> ingredients;
+    @ManyToMany(targetEntity = Ingredient.class)
+    private List<Ingredient> ingredients;
+
+    @PrePersist //Antes de persistir a entidade no banco o método é chamado para atribuir a data ao createdAt
+    void createdAt(){
+        this.createdAt = new Date();
+    }
 }
