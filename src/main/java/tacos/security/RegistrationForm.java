@@ -2,7 +2,6 @@ package tacos.security;
 
 import lombok.Data;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import sun.security.util.Password;
 import tacos.User;
 
 @Data
