@@ -25,8 +25,12 @@ public class OrderController {
 
     private OrderRepository orderRepository;
 
-    public OrderController(OrderRepository orderRepository) {
+    private OrderProps orderProps;
+
+    public OrderController(OrderRepository orderRepository, OrderProps orderProps) {
+        this.orderProps = orderProps;
         this.orderRepository = orderRepository;
+
     }
 
     @GetMapping("/current")
